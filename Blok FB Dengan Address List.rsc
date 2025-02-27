@@ -1,5 +1,5 @@
 /ip firewall filter
-add action=drop chain=forward dst-address-list=Dump IP Facebook src-address=192.168.50.0/24 comment="Blokir Facebook Dengan Address List"
+add action=drop chain=forward dst-address-list=Dump IP Facebook src-address=192.170.10.0/24 comment="Blokir Facebook Dengan Address List"
 
 /ip firewall address-list
 add address=146.88.59.0/24 list=Dump IP Facebook
