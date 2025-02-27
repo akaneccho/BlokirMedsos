@@ -18,4 +18,4 @@ add address=31.13.24.0/21 list=Dump IP Facebook
 add address=199.201.64.0/22 list=Dump IP Facebook
 add address=185.60.216.0/22 list=Dump IP Facebook
 add address=157.240.0.0/16 list=Dump IP Facebook
-add address=129.205.94.0/23 list=Dump IPFacebook
+add address=129.205.94.0/23 list=Dump IP Facebook
