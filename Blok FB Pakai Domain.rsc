@@ -19,7 +19,7 @@ add action=drop chain=forward content="fbcdn.net"
 add action=drop chain=forward content=".facebook."
 add action=drop chain=forward content=".fbcdn."
 add action=drop chain=forward content="facebook.net"
-add action=drop chain=forward content="fbsbx.com
+add action=drop chain=forward content="fbsbx.com"
 add action=drop chain=forward content="live.fb.com"
 add action=drop chain=forward content="fb.com"
 
