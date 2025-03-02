@@ -1,0 +1,45 @@
+/ip firewall filter
+add action=drop chain=forward dst-address-list=Facebook src-address=192.168.50.0/24 comment="Blocking Facebook on RouterOS using Address-Lists"
+
+/ip firewall address-list
+add address=146.88.59.0/24 list=Facebook
+add address=74.119.76.0/22 list=Facebook
+add address=45.64.40.0/22 list=Facebook
+add address=69.63.176.0/20 list=Facebook
+add address=31.13.64.0/18 list=Facebook
+add address=66.220.144.0/20 list=Facebook
+add address=69.171.224.0/19 list=Facebook
+add address=103.4.96.0/22 list=Facebook
+add address=173.252.64.0/19 list=Facebook
+add address=173.252.96.0/19 list=Facebook
+add address=179.60.192.0/22 list=Facebook
+add address=204.15.20.0/22 list=Facebook
+add address=31.13.24.0/21 list=Facebook
+add address=199.201.64.0/22 list=Facebook
+add address=185.60.216.0/22 list=Facebook
+add address=157.240.0.0/16 list=Facebook
+add address=129.205.94.0/23 list=Facebook
+
+/ip firewall layer7-protocol
+add name=Youtube regexp="^.+(youtube.com|googlevideo.com).*\$"
+/ip firewall filter
+add action=drop chain=forward layer7-protocol=Youtube
+
+/ip firewall filter
+add action=drop chain=forward content="youtube.com" 
+add action=drop chain=forward content="googlevideo.com"
+add action=drop chain=forward content=".youtube."
+add action=drop chain=forward content=".googlevideo."
+
+/ip firewall filter
+add action=drop chain=forward protocol=tcp tls-host="youtube.com"
+add action=drop chain=forward protocol=tcp tls-host="googlevideo.com"
+add action=drop chain=forward protocol=tcp tls-host="*.youtube.*"
+add action=drop chain=forward protocol=tcp tls-host="*.googlevideo.*"
+
+/ip firewall filter
+add action=drop chain=forward comment="Blocking Youtube on RouterOS using TLS Host" dst-address-list=Youtube src-address=192.168.50.0/24
+
+/ip firewall mangle
+add action=add-dst-to-address-list address-list=Youtube address-list-timeout=4w2d chain=prerouting comment="Detecting IP Addresses Youtube" protocol=tcp tls-host=*.youtube.com
+add action=add-dst-to-address-list address-list=Youtube address-list-timeout=4w2d chain=prerouting protocol=tcp tls-host=*youtube*
